@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Miembros de los Avengers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-primary">Miembros de los Avengers</h1>
+        <a href="{{ url_for('avenger_bp.new_avenger') }}" class="btn btn-success">+ Nuevo Avenger</a>
+    </div>
+
+    <div class="row g-4">
+        {% for avenger in avengers %}
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                {% if avenger.foto_nombre %}
+                <img src="{{ url_for('static', filename='uploads/' + avenger.foto_nombre) }}" class="card-img-top" alt="{{ avenger.alias }}">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">{{ avenger.nombre }}</h4>
+                    <h6 class="card-subtitle text-muted mb-2">Alias: {{ avenger.alias }}</h6>
+                    <p class="card-text"><strong>Habilidades:</strong> {{ avenger.habilidades }}</p>
+                    <p class="card-text"><strong>Actor:</strong> {{ avenger.actor }}</p>
+                    <form action="{{ url_for('avenger_bp.delete_avenger_form', avenger_id=avenger.id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar a {{ avenger.nombre }}?')">
+                        <button type="submit" class="btn btn-danger btn-sm mt-2">Eliminar</button>
+                        <a href="{{ url_for('avenger_bp.edit_avenger', avenger_id=avenger.id) }}" class="btn btn-warning btn-sm mt-2 ms-2">Editar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
