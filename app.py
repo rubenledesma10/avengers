@@ -1,3 +1,4 @@
+
 from flask import Flask   #importamos flask
 from backend.config.config import DATABASE_CONNECTION_URI #importamos la variable de conexion a la bd
 from backend.models.db import db 
