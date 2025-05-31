@@ -6,7 +6,7 @@ from backend.models.avengers import Avenger
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='frontentd/templates')
 app.register_blueprint(avenger_bp)
 
 
